@@ -25,18 +25,34 @@ SECRET_KEY = 'django-insecure-^b0#vtimjjnadn@ihw!y*(we0uoskft-_x+pc&#q%9i9w(s-db
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-onadj-iloveschool-5kjywzgoyki.ws-eu117.gitpod.io']
+ALLOWED_HOSTS = [
+    '8000-onadj-iloveschool-5kjywzgoyki.ws-eu117.gitpod.io',  # Dodaj više domena ako koristiš.
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-onadj-iloveschool-5kjywzgoyki.ws-eu117.gitpod.io',  # Tvoj Gitpod URL
+]
 
 # Application definition
 
 INSTALLED_APPS = [
+    # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # Required for allauth
+
+    # Third-party apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # Custom apps
+    # Dodaj ovdje tvoje aplikacije, primjerice:
+    # 'education',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Dodano za allauth
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'iloveschool.urls'
@@ -54,18 +72,38 @@ ROOT_URLCONF = 'iloveschool.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [],  # Dodaj putanje ako imaš vlastite HTML datoteke izvan app foldera.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',  # Required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Default authentication backend
+    'django.contrib.auth.backends.ModelBackend',
+
+    # Allauth authentication backend
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# django-allauth settings
+SITE_ID = 1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_REDIRECT_URL = '/'  # Post-login redirect URL
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Postavi na 'mandatory' za potvrdu emaila
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+LOGIN_URL = '/accounts/login/'
 
 WSGI_APPLICATION = 'iloveschool.wsgi.application'
 

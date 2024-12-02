@@ -22,6 +22,8 @@
       rel="stylesheet" 
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
       crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     {% endblock %}
   </head>
 
@@ -52,26 +54,34 @@
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-                    <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
-                                <div><i class="fas fa-user fa-lg"></i></div>
-                                <p class="my-0">My Account</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                          {% if request.user.is_authenticated %}
-                              {% if request.user.is_superuser %}
-                                  <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>
-                              {% endif %}
-                              <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                              <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                          {% else %}
-                              <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                              <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                          {% endif %}
-                      </div>
-                    </li>
+                  <li class="list-inline-item dropdown">
+                    <a 
+  class="text-black nav-link" 
+  href="#" 
+  id="user-options" 
+  data-bs-toggle="dropdown" 
+  aria-expanded="false">
+  <div class="text-center">
+    <div><i class="fas fa-user fa-lg"></i></div>
+    <p class="my-0">My Account</p>
+  </div>
+</a>
+
+                    <ul class="dropdown-menu border-0" aria-labelledby="user-options">
+                      {% if request.user.is_authenticated %}
+                        {% if request.user.is_superuser %}
+                          <li><a href="" class="dropdown-item">Product Management</a></li>
+                        {% endif %}
+                        <li><a href="" class="dropdown-item">My Profile</a></li>
+                        <li><a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a></li>
+                      {% else %}
+                        <li><a href="{% url 'account_signup' %}" class="dropdown-item">Register</a></li>
+                        <li><a href="{% url 'account_login' %}" class="dropdown-item">Login</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                  
+                
 
                     <li class="list-inline-item">
                       <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
@@ -96,8 +106,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                {% include 'includes/mobile-top-header.html' %}
-                {% include 'includes/main-nav.html' %}
+                
             </nav>
         </div>
         

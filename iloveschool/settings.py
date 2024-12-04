@@ -27,11 +27,11 @@ SECRET_KEY = 'django-insecure-^b0#vtimjjnadn@ihw!y*(we0uoskft-_x+pc&#q%9i9w(s-db
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-onadj-iloveschool-sxsz0odafkq.ws-eu117.gitpod.io',  # Dodaj više domena ako koristiš.
+    '8000-onadj-iloveschool-qhp5ggm36k7.ws-eu117.gitpod.io',  # Dodaj više domena ako koristiš.
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-onadj-iloveschool-sxsz0odafkq.ws-eu117.gitpod.io',  # Tvoj Gitpod URL
+    'https://8000-onadj-iloveschool-qhp5ggm36k7.ws-eu117.gitpod.io/',  # Tvoj Gitpod URL
 ]
 
 # Application definition
